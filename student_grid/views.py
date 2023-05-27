@@ -9,9 +9,6 @@ from django.core.paginator import Paginator
 # models
 from student_grid.models import Student
 
-# forms
-from student_grid.forms import StudentFilterForm
-
 class StudentListView(ListView):
     model = Student
     template_name = "index.html"
