@@ -3,22 +3,22 @@
 {% load bootstrap4 %}
 
 {% block content %}
-    <div class="container">
-        <div class=""> 
-            <div class="container" style="padding-top:80px;">
+    <div class="container student-details">
+        <div class="" style="padding-top:80px;"> 
+            <div class="container">
                 <h1 style="font-family: 'Russo One',sans-serif;">Apply Filter</h1>
                 <form method="GET" action="{% url 'student_grid:student_list' %}" class="filter">
                     <table>
                         <tr>
-                            <td>
+                            <td style="padding-right:150px;">
                                 <div class="form-group">
-                                    <label>Student ID: </label>
+                                    <label>Student ID: </label><br>
                                     <input type="text" name="student_id" placeholder="Student ID">
                                 </div>
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <label>First Name: </label>
+                                    <label>First Name: </label><br>
                                     <input type="text" name="fname" placeholder="First Name">
                                 </div>
                             </td>
@@ -26,7 +26,7 @@
                         <tr>
                             <td>
                                 <div class="form-group">
-                                    <label>Last Name: </label>
+                                    <label>Last Name: </label><br>
                                     <input type="text" name="lname" placeholder="Last Name">
                                 </div>
                             </td>
@@ -44,7 +44,7 @@
                         <tr>
                             <td>
                                 <div class="form-group">
-                                    <label>Minimum Percentage: </label>
+                                    <label>Minimum Percentage: </label><br>
                                     <input type="text" name="minpercentage" placeholder="Minimum Percentage">
                                 </div>
                             </td>
@@ -59,14 +59,6 @@
                                         <option value="30"> 30 </option>
                                         <option value="50"> 50 </option>
                                       </select>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-group">
-                                    <label>Number of recorde per page: </label>
-                                    <input type="text" name="maxpercentage" placeholder="Default is 10">
                                 </div>
                             </td>
                         </tr>
