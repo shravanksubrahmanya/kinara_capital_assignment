@@ -8,39 +8,74 @@
             <div class="container" style="padding-top:80px;">
                 <h1 style="font-family: 'Russo One',sans-serif;">Apply Filter</h1>
                 <form method="GET" action="{% url 'student_grid:student_list' %}" class="filter">
-                    <div class="form-group">
-                        <label>Student ID: </label>
-                        <input type="text" name="student_id" placeholder="Student ID">
-                    </div>
-                    <div class="form-group">
-                        <label>First Name: </label>
-                        <input type="text" name="fname" placeholder="First Name">
-                    </div>
-                    <div class="form-group">
-                        <label>Last Name: </label>
-                        <input type="text" name="lname" placeholder="Last Name">
-                    </div>
-                    <div class="form-group">
-                        <label>Gender: </label>
-                        <select name="gender">
-                            <option value="">Select Gender</option>
-                            <option value="Male"> Male</option>
-                            <option value="Female">Female</option>
-                          </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Minimum Percentage: </label>
-                        <input type="text" name="minpercentage" placeholder="Minimum Percentage">
-                    </div>
-                    <div class="form-group">
-                        <label>Maximum Percentage: </label>
-                        <input type="text" name="maxpercentage" placeholder="Maximum Percentage">
-                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label>Student ID: </label>
+                                    <input type="text" name="student_id" placeholder="Student ID">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label>First Name: </label>
+                                    <input type="text" name="fname" placeholder="First Name">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label>Last Name: </label>
+                                    <input type="text" name="lname" placeholder="Last Name">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label>Gender: </label>
+                                    <select name="gender">
+                                        <option value="">Select Gender</option>
+                                        <option value="Male"> Male</option>
+                                        <option value="Female">Female</option>
+                                      </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label>Minimum Percentage: </label>
+                                    <input type="text" name="minpercentage" placeholder="Minimum Percentage">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label>Number of records per page: </label>
+                                    <select name="no_of_rows">
+                                        <option value="5" selected> 5 </option>
+                                        <option value="10"> 10 </option>
+                                        <option value="15"> 15 </option>
+                                        <option value="20"> 20 </option>
+                                        <option value="30"> 30 </option>
+                                        <option value="50"> 50 </option>
+                                      </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label>Number of recorde per page: </label>
+                                    <input type="text" name="maxpercentage" placeholder="Default is 10">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                     <button type="submit" class="btn btn-primary">Fetch details</button>
                 </form>
             </div>
 
-            <div class="t-row1" style="display:flex; flex-direction:row; padding:70px 0px" >  
+            <div class="t-row1" style="display:flex; flex-direction:row; padding-top:40px;" >  
                 <table class="table table-hover table-striped table-bordered thead-dark">
                     <thead class="bg-blue">
                         <tr>
@@ -55,7 +90,7 @@
                           </tr>
                     </thead>
                     <tbody>
-                        {% for student in student_list %}
+                        {% for student in page_obj %}
                         <tr>
                             <td>{{ student.std_id }}</td>
                             <td>{{ student.std_fname }}</td>
@@ -67,10 +102,48 @@
                             <td>{{ student.percentage }}</td>
                           </tr>
                           {%empty%}
-                          <td colspan="7">No student details are available!</td>
+                          <td colspan="8">No student details are available!</td>
                         {% endfor %}
                     </tbody>
                 </table>
+            </div>
+
+            <div class="pagination-bar">
+                {% comment %} pagination {% endcomment %}
+              <nav aria-label="Pagination" style="text-align:center;">
+                <ul class="pagination">
+                  {% if page_obj.has_previous %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  {% endif %}
+              
+                  {% for num in page_obj.paginator.page_range %}
+                  {% if page_obj.number == num %}
+                  <li class="page-item active" aria-current="page">
+                    <span class="page-link">{{ num }} <span class="sr-only">(current)</span></span>
+                  </li>
+                  {% else %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                  </li>
+                  {% endif %}
+                  {% endfor %}
+              
+                  {% if page_obj.has_next %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </nav>
+              {% comment %} end pagination {% endcomment %}
             </div>
         </div>
     </div>
