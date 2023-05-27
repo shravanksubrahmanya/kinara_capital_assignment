@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'student_grid',
-    'bootstrap4'
+    'django_select2',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
