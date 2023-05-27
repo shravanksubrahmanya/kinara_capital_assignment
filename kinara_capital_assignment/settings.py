@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'student_grid',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -124,6 +125,8 @@ STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
+MEDIA_URL = 'media/'
+MEDIA_ROOT = MEDIA_DIR
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
