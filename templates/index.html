@@ -36,7 +36,7 @@
                         <label>Maximum Percentage: </label>
                         <input type="text" name="maxpercentage" placeholder="Maximum Percentage">
                     </div>
-                    <button type="submit" class="btn btn-primary">Filter</button>
+                    <button type="submit" class="btn btn-primary">Fetch details</button>
                 </form>
             </div>
 
@@ -66,6 +66,8 @@
                             <td>{{ student.total_marks }}</td>
                             <td>{{ student.percentage }}</td>
                           </tr>
+                          {%empty%}
+                          <td colspan="7">No student details are available!</td>
                         {% endfor %}
                     </tbody>
                 </table>
