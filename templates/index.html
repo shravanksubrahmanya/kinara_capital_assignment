@@ -1,26 +1,75 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load bootstrap4 %}
 
 {% block content %}
     <div class="container">
-        <h1> Welcome to Student Grid System</h1>
-        {% comment %} <div class="middle-layer justify-content-md-center"> 
-            <div class="t-row1" style="display:flex; flex-direction:row; padding:70px 0px" >  
-                <div class="t-col1" style="width:50%">
-                    <h2> Welcome to Terraformer Meeting Scheduler.</h2>
-                    <p> Terraformer Meeting Scheduler is a service for secure
-                         scheduling of meetings. A terraformer can schedule a meeeting 
-                        with any other terraformer considering his off hours and other constraints.</p>
-
-                    {% if user.is_authenticated %}
-                    <a href = "{% url 'meeting_scheduler:offhour_create' pk=user.pk %}"> <span class="btn btn-success"> Mark Off-hours </span></a>
-                    <a href = "{% url 'meeting_scheduler:appointment_create' pk=user.pk %}"> <span class="btn btn-primary"> Schedule a meeting </span></a>
-                    {% endif %}
-                </div>
-                <div class="t-col2" style="width:50%">
-                    <img src="{% static 'images/meeting2.png' %}" width="400px">
-                </div>
+        <div class=""> 
+            <div class="container" style="padding-top:80px;">
+                <h1 style="font-family: 'Russo One',sans-serif;">Apply Filter</h1>
+                <form method="GET" action="{% url 'student_grid:student_list' %}" class="filter">
+                    <div class="form-group">
+                        <label>Student ID: </label>
+                        <input type="text" name="student_id" placeholder="Student ID">
+                    </div>
+                    <div class="form-group">
+                        <label>First Name: </label>
+                        <input type="text" name="fname" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name: </label>
+                        <input type="text" name="lname" placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Gender: </label>
+                        <select name="gender">
+                            <option value="">Select Gender</option>
+                            <option value="Male"> Male</option>
+                            <option value="Female">Female</option>
+                          </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Minimum Percentage: </label>
+                        <input type="text" name="minpercentage" placeholder="Minimum Percentage">
+                    </div>
+                    <div class="form-group">
+                        <label>Maximum Percentage: </label>
+                        <input type="text" name="maxpercentage" placeholder="Maximum Percentage">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </form>
             </div>
-        </div> {% endcomment %}
+
+            <div class="t-row1" style="display:flex; flex-direction:row; padding:70px 0px" >  
+                <table class="table table-hover table-striped table-bordered thead-dark">
+                    <thead class="bg-blue">
+                        <tr>
+                            <th>Student ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Date of Birth</th>
+                            <th>Gender</th>
+                            <th>Maximum Total Marks</th>
+                            <th>Gained Total Marks</th>
+                            <th>Percentage</th>
+                          </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in student_list %}
+                        <tr>
+                            <td>{{ student.std_id }}</td>
+                            <td>{{ student.std_fname }}</td>
+                            <td>{{ student.std_lname }}</td>
+                            <td>{{ student.dob }}</td>
+                            <td>{{ student.gender }}</td>
+                            <td>{{ student.max_total_marks }}</td>
+                            <td>{{ student.total_marks }}</td>
+                            <td>{{ student.percentage }}</td>
+                          </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 {% endblock content %}

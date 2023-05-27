@@ -19,10 +19,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from student_grid.views import StudentListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.Homepage.as_view(), name='home'),
-    path('student/grid/', include('student_grid.urls', namespace='student_grid')),
+    path('', StudentListView.as_view(), name='default-page'),
+    path('student/', include('student_grid.urls', namespace='student_grid'), name="student_grid"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # to display images on web pages
 
